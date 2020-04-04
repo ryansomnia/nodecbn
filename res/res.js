@@ -1,10 +1,17 @@
 'use strict';
 
-exports.ok = function(values, res) {
-    let data = {
-        'status': 200,
-        'values': values
-    };
-    res.json(data);
-    res.end();
-};
+var response = function () {}
+response.message = function (code, message, data) {
+    return {
+        code: code,
+        message: message,
+        data: data
+    }
+}
+response.success = function (data) {
+    return response.message(200, "success", data)
+}
+response.error = function (code, message) {
+    return response.message(code, message, null)
+}
+module.exports = response

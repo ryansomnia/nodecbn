@@ -1,17 +1,18 @@
 'use strict';
 
-module.exports = function(app) {
+module.exports = function (app) {
 
 
     let dataKKA = require('../controller/controllerKKA');
     let dataJemaat = require('../controller/controllerJemaat');
     let dataLaporan = require('../controller/controllerLaporan');
     let dataNextWeek = require('../controller/controllerNextWeek');
+    let dataRenungan = require('../controller/controllerRenungan');
 
     app.route('/')
         .get(dataKKA.index);
 
-   //route KKA
+    //route KKA
 
     app.route('/tb_kkas')
         .get(dataKKA.tb_kkas);
@@ -24,7 +25,7 @@ module.exports = function(app) {
 
     app.route('/tb_kkas')
         .put(dataKKA.updateKKA);
-    
+
     app.route('/tb_kkas')
         .delete(dataKKA.deleteKKA);
 
@@ -41,12 +42,28 @@ module.exports = function(app) {
 
     app.route('/tb_jemaat')
         .put(dataJemaat.updateJemaat);
-    
+
     app.route('/tb_jemaat')
         .delete(dataJemaat.deleteJemaat);
 
 
-    //route Jemaat
+    //route Renungan
+
+    app.route('/renungan')
+        .get(dataRenungan.tb_renungan);
+
+    app.route('/renungan/:id')
+        .get(dataRenungan.findByid);
+
+    app.route('/renungan/:id')
+        .delete(dataRenungan.deleteRenungan)
+
+    app.route('/renungan')
+        .post(dataRenungan.createRenungan)
+
+    app.route('/renungan')
+        .put(dataRenungan.updateRenungan)
+
 
     // app.route('/tb_laporan')
     //     .get(dataLaporan.tb_laporan);

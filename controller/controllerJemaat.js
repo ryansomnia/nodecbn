@@ -5,11 +5,11 @@ const connection = require('../config/connection');
 
 exports.tb_jemaat = function(req, res) {
     connection.query('SELECT * FROM tb_jemaat',
-     function (error, rows, fields){
-        if(error){
-            console.log(error)
-        } else{
-            response.ok(rows, res)
+    function (data, rows, error) {
+        if (data) {
+            return res.json(response.error(500,"error"))
+        } else {
+            return res.json(response.success(rows))
         }
     });
 };
@@ -19,11 +19,11 @@ exports.findJemaat = function(req, res) {
 
     connection.query('SELECT * FROM tb_jemaat where idJemaat = ?',
     [ id ], 
-    function (error, rows, fields){
-        if(error){
-            console.log(error)
-        } else{
-            response.ok(rows, res)
+    function (data, rows, error) {
+        if (data) {
+            return res.json(response.error(500,"error"))
+        } else  {
+            return res.json(response.success(rows))
         }
     });
 };
@@ -41,11 +41,11 @@ exports.createJemaat = function(req, res) {
 
     connection.query('INSERT INTO tb_jemaat (idJemaat, namaDepan, namaBelakang, status, tanggalLahir, tempatLahir, alamat, tanggalBaptis) values (?,?,?,?,?,?,?,?)',
     [ idJemaat, namaDepan, namaBelakang, status, tanggalLahir, tempatLahir, alamat, tanggalBaptis ], 
-    function (error, rows, fields){
-        if(error){
-            console.log(error)
-        } else{
-            response.ok("Berhasil menambahkan data Jemaat", res)
+    function (data, rows, error) {
+        if (data) {
+            return res.json(response.error(500,"error"))
+        } else {
+            return res.json(response.success(rows))
         }
     });
 };
@@ -64,11 +64,11 @@ exports.updateJemaat = function(req, res) {
     connection.query('UPDATE tb_jemaat SET namaDepan = ?, namaBelakang = ?, status = ?, tanggalLahir = ?, tempatLahir = ?, alamat = ?, tanggalBaptis = ? WHERE idJemaat = ?',
     
     [ namaDepan, namaBelakang, status, tanggalLahir, tempatLahir, alamat, tanggalBaptis, idJemaat ], 
-    function (error, rows, fields){
-        if(error){
-            console.log(error)
-        } else{
-            response.ok("Berhasil merubah data!", res)
+    function (data, rows, error) {
+        if (data) {
+            return res.json(response.error(500,"error"))
+        } else {
+            return res.json(response.success(req.body)) 
         }
     });
 };
@@ -79,11 +79,11 @@ exports.deleteJemaat = function(req, res) {
 
     connection.query('DELETE FROM tb_jemaat WHERE idJemaat = ?',
     [ idJemaat ], 
-    function (error, rows, fields){
-        if(error){
-            console.log(error)
-        } else{
-            response.ok("Berhasil menghapus data!", res)
+    function (data, rows, error) {
+        if (data) {
+            return res.json(response.error(500,"error"))
+        } else {
+            return res.json(response.success(rows))
         }
     });
 };
